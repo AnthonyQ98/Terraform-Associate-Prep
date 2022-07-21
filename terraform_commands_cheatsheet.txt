@@ -1,14 +1,21 @@
 terraform init = Initialize the project and download providers/modules specified in tf file
+    - if you add a module, you'll need to rerun terraform init.
 terraform fmt = It is similar to golang 'go fmt' command. It will format your terraform code to the standard expected.
 terraform validate = It will ensure your terraform file has the required arguements/values
 terraform plan = Generates a plan to show what our terraform code would create/destroy (aka: doesn't create infrastructure, just shows what would be created)
     - we can use -out="" to save the plan
     - we can use -var=*variable_name*=*variable value* 
+    - if you change an output name, you will need to terraform plan again (terraform refresh wont suffice)
 terraform apply - It will show our plan again, and ask for confirmation if we want to actually APPLY/USE the plan (aka: create the infrastructure)
     - can use the -auto-approve flag to skip the confirmation stage.
-
+terraform refresh - make the state file match the actual state.
+terraform output - show defined outputs
+    - you can add output names onto the end for specific results, such as: terraform output my_public_ip, assuming my_public_ip is a defined output.
 
 Locals vs Variables:
     - Locals are generally hardcoded/set values that are not expected to change.
     - Variables will usually change (but not always)
     - You can format your strings using ${local.*variable name*}, example: favourite_name = "my_favourite_name_is_${local.name}", assuming there is a local 'name' value.
+
+Modules can be used to group up and reuse other code that depends on many resources/values.
+    - Example: aws vpc requires lots of configuring. We can use the aws/vpc module to simplify this deployment.
