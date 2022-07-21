@@ -16,11 +16,15 @@ variable "instance_type" {
     type = string
 }
 
+locals {
+    project_name = "Anthony"
+}
+
 resource "aws_instance" "app_server" {
   ami           = "ami-0cff7528ff583bf9a"
   instance_type = var.instance_type
 
   tags = {
-    Name = "MyTerraformServer"
+    Name = "terraform-${local.project_name}"
   }
 }

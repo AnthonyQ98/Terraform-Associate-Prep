@@ -5,3 +5,10 @@ terraform plan = Generates a plan to show what our terraform code would create/d
     - we can use -out="" to save the plan
     - we can use -var=*variable_name*=*variable value* 
 terraform apply - It will show our plan again, and ask for confirmation if we want to actually APPLY/USE the plan (aka: create the infrastructure)
+    - can use the -auto-approve flag to skip the confirmation stage.
+
+
+Locals vs Variables:
+    - Locals are generally hardcoded/set values that are not expected to change.
+    - Variables will usually change (but not always)
+    - You can format your strings using ${local.*variable name*}, example: favourite_name = "my_favourite_name_is_${local.name}", assuming there is a local 'name' value.
